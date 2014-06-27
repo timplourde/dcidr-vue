@@ -1,8 +1,4 @@
 {
-  "name": "dmweb",
-  "version": "0.0.0",
-  "description": "",
-  "main": "index.js",
   "dependencies": {
     "gulp": "~3.8.0"
   },
@@ -16,10 +12,5 @@
     "gulp-rename": "~1.2.0",
     "gulp-less": "~1.2.3",
     "merge-stream": "~0.1.1"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC"
+  }
 }
