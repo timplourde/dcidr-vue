@@ -1,0 +1,183 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>DecisionMaster</title>
+    <link href="../src/css/normalize.css" rel="stylesheet" />
+    <link href="../src/css/html5bp.css" rel="stylesheet" />
+    <link href="../src/css/buttons.css" rel="stylesheet" />
+    <link href="../src/css/site.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+
+    <div id="dm" class="app-layout">
+
+        <header>
+            <div class="container">
+                <h1>DecisionMaster</h1>
+            </div>
+        </header>
+
+        <main>
+            <div class="container">
+                <section class="app-header">
+                    <h2>Step 3 of 4:  Rank Options</h2>
+                </section>
+                <section class="app-body">
+                    <p>Complete each of the 10 sentences below (0% complete):</p>
+
+                    <div class="sentence">
+                        <div class="row">
+                           1) Regarding <span class="criteria">educational value</span>, <span class="option">NYC trip</span> is
+                        </div>
+
+                        <div class="row">
+                            <div class="sentence-option">much worse than</div>
+                            <div class="sentence-option">worse than</div>
+                            <div class="sentence-option">about the same as</div>
+                            <div class="sentence-option">better than</div>
+                            <div class="sentence-option">much better than</div>
+                        </div>
+
+                        <div class="row">
+                            <span class="option">camping</span>.
+                        </div>
+                    </div>
+
+                    <div class="sentence completed">
+                        <div class="row">
+                           2) Regarding <span class="criteria">educational value</span>, <span class="option">NYC trip</span> is
+                        </div>
+
+                        <div class="row">
+                            <div class="sentence-option">much worse than</div>
+                            <div class="sentence-option">worse than</div>
+                            <div class="sentence-option selected">about the same as</div>
+                            <div class="sentence-option">better than</div>
+                            <div class="sentence-option">much better than</div>
+                        </div>
+
+                        <div class="row">
+                            <span class="option">camping</span>.
+                        </div>
+                    </div>
+
+                    <div class="sentence completed">
+                        <div class="row">
+                           3)  Regarding <span class="criteria">educational value</span>, <span class="option">NYC trip</span> is
+                        </div>
+
+                        <div class="row">
+                            <div class="sentence-option">much worse than</div>
+                            <div class="sentence-option">worse than</div>
+                            <div class="sentence-option selected">about the same as</div>
+                            <div class="sentence-option">better than</div>
+                            <div class="sentence-option">much better than</div>
+                        </div>
+
+                        <div class="row">
+                            <span class="option">camping</span>.
+                        </div>
+                    </div>
+
+                    <div class="sentence completed">
+                        <div class="row">
+                           4)  Regarding <span class="criteria">educational value</span>, <span class="option">NYC trip</span> is
+                        </div>
+
+                        <div class="row">
+                            <div class="sentence-option">much worse than</div>
+                            <div class="sentence-option">worse than</div>
+                            <div class="sentence-option selected">about the same as</div>
+                            <div class="sentence-option">better than</div>
+                            <div class="sentence-option">much better than</div>
+                        </div>
+
+                        <div class="row">
+                            <span class="option">camping</span>.
+                        </div>
+                    </div>
+
+                    <div class="sentence completed">
+                        <div class="row">
+                           5)  Regarding <span class="criteria">educational value</span>, <span class="option">NYC trip</span> is
+                        </div>
+
+                        <div class="row">
+                            <div class="sentence-option">much worse than</div>
+                            <div class="sentence-option">worse than</div>
+                            <div class="sentence-option selected">about the same as</div>
+                            <div class="sentence-option">better than</div>
+                            <div class="sentence-option">much better than</div>
+                        </div>
+
+                        <div class="row">
+                            <span class="option">camping</span>.
+                        </div>
+                    </div>
+
+                    <div class="sentence completed">
+                        <div class="row">
+                            Regarding <span class="criteria">educational value</span>, <span class="option">NYC trip</span> is
+                        </div>
+
+                        <div class="row">
+                            <div class="sentence-option">much worse than</div>
+                            <div class="sentence-option">worse than</div>
+                            <div class="sentence-option selected">about the same as</div>
+                            <div class="sentence-option">better than</div>
+                            <div class="sentence-option">much better than</div>
+                        </div>
+
+                        <div class="row">
+                            <span class="option">camping</span>.
+                        </div>
+                    </div>
+
+                    <div class="sentence completed">
+                        <div class="row">
+                            Regarding <span class="criteria">educational value</span>, <span class="option">NYC trip</span> is
+                        </div>
+
+                        <div class="row">
+                            <div class="sentence-option">much worse than</div>
+                            <div class="sentence-option">worse than</div>
+                            <div class="sentence-option selected">about the same as</div>
+                            <div class="sentence-option">better than</div>
+                            <div class="sentence-option">much better than</div>
+                        </div>
+
+                        <div class="row">
+                            <span class="option">camping</span>.
+                        </div>
+                    </div>
+
+                </section>
+                <section class="app-footer">
+                    <button class="pull-left pure-button button-secondary">Previous</button>
+                    <button class="pull-right pure-button button-primary">Next</button>
+                </section>
+            </div>
+        </main>
+
+        <footer>
+            <div class="container">
+                &copy; 2014 Tim Plourde
+            </div>
+        </footer>
+
+    </div>
+    <script src="../src/js/fastclick.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+        $(document).on("ready", function () {
+            new FastClick(document.body);
+            $(".sentence-option").on("click", function () {
+                var $this = $(this);
+                $this.siblings(".sentence-option").removeClass("selected");
+                $this.addClass("selected");
+            });
+        });
+    </script>
+</body>
+</html>

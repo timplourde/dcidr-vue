@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<!--[if lt IE 9]>      <html class="lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--><html> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>decidr</title>
+    <meta name="description" content="Quick & Easy Decitions">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- favicon.ico, apple-touch-icon.png, etc here -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="dm.min.css">
+   
+    <!--<script type="text/javascript">
+    /* async loading */
+    WebFontConfig = {
+        google: { families: ['Open+Sans:400italic,400,700:latin'] }
+    };
+    (function () {
+        var wf = document.createElement('script');
+        wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+          '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+        wf.type = 'text/javascript';
+        wf.async = 'true';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(wf, s);
+    })(); </script>-->
+
+</head>
+                      <body>
+
+                          <div id="oldIe">
+                              Sorry but this app only supports modern browsers.  You can get one here: <a href="https://www.google.com/chrome/browser/">Google Chrome</a>.
+                          </div>
+
+                          <div id="dm">
+                              <div data-bind="css: {'welcome-layout' : useWelcomeLayout, 'app-layout': !useWelcomeLayout()}">
+
+                                  <header>
+                                      <div class="container">
+                                          <img class="logo" src="dcidr.svg" alt="decidr" />
+                                      </div>
+                                  </header>
+
+                                  <main data-bind="template : currentView, css: {'transitioning' : isTransitioning}">
+
+                                  </main>
+
+                                  <footer>
+                                      <div class="container">
+                                          &copy; 2014 Tim Plourde
+                                      </div>
+                                  </footer>
+
+                              </div>
+                          </div>
+
+                          <script id="loading-template" type="text/html">
+                              <div class="container">
+                                  <div class="row loading">
+                                      loading...
+                                  </div>
+                              </div>
+                          </script>
+
+                          <script id="welcome-template" type="text/html">
+                              <div class="container">
+                                  <div class="row">
+                                      <h2>Quick &amp; Easy Decisions</h2>
+                                  </div>
+
+                                  <div class="row">
+                                      <a href="#" class="pure-button button-xlarge button-primary" data-bind="click: $root.newDecision">Get Started</a>
+                                  </div>
+
+                                  <div class="row">
+                                      <a href="#" class="pure-button button-secondary" data-bind="click: showAbout, visible: !isAboutSectionVisible()">Learn More</a>
+                                  </div>
+
+                                  <div class="row">
+                                      <a href="#" class="pure-button button-secondary" data-bind="click: loadArchive, visible: isArchiveButtonVisible">Archive</a>
+                                  </div>
+
+                                  <div class="row about" data-bind="css: {'expanded': isAboutSectionVisible}">
+                                      <h3>About this app</h3>
+                                      <p>
+                                          Dcidr helps you make tough decisions which involve multiple <strong>options</strong>
+                                          and <strong>criteria</strong>.
+                                      </p>
+
+                                      <h3>Give me an example</h3>
+                                      <p>
+                                          Let's say you were choosing a family vacation.  Your options and criteria might be:
+                                      </p>
+                                      <table>
+                                          <tr>
+                                              <th>Options</th>
+                                              <th>Criteria</th>
+                                          </tr>
+                                          <tr>
+                                              <td>
+                                                  New York City
+                                              </td>
+                                              <td>
+                                                  Cost
+                                              </td>
+                                          </tr>
+                                          <tr>
+                                              <td>
+                                                  Camping
+                                              </td>
+                                              <td>
+                                                  Fun
+                                              </td>
+                                          </tr>
+                                          <tr>
+                                              <td>
+                                                  Ski Resort
+                                              </td>
+                                              <td>
+                                                  Educational Value
+                                              </td>
+                                          </tr>
+                                          <tr>
+                                              <td>
+                                                  Beach House
+                                              </td>
+                                              <td>
+                                                  Relaxation
+                                              </td>
+                                          </tr>
+                                      </table>
+
+                                      <h3>How does it work?</h3>
+                                      <p>
+                                          Dcidr uses a Prioritization Matrix algorithm help you make your decision.  Once you complete a series of sentences, the relative rankings among your options are calculated based on your criteria choices.
+                                      </p>
+
+                                      <h3>Is any of this data being stored?</h3>
+                                      <p>
+                                          All data entered only exists in your web browser.  If you clear your local storage, any decisions saved in your archive will be lost.  No decisions are ever transmitted over the Internet or stored on a server.  Google Analytics is uses to track page views.
+                                      </p>
+
+                                      <h3>Who wrote this and why?</h3>
+
+                                      <p>Dcidr was written by Tim Plourde, a web developer from Pennsylvania.  </p>
+
+                                      <p>
+                                          He has written several versions of this application over the years using different tools (Java, PHP, Ruby, C#, Silverlight, WPF, Flash, Windows Phone, Windows RT, and now HTML5/JS/CSS3).  It's his go-to demo app when learning new things.
+                                      </p>
+                                      <p>
+                                          You can greach Tim via Twitter <a href="https://twitter.com/timplourde">@timplourde</a>.
+                                      </p>
+
+                                  </div>
+
+                                  <div class="row">
+
+                                      <div class="disclaimer">
+                                          This app is for entertainment purposes only.  Its creator is not responsible for actions taken by users as a result of its use.
+                                      </div>
+
+                                  </div>
+                              </div>
+                          </script>
+
+                          <script id="define-options-template" type="text/html">
+                              <div class="container">
+                                  <section class="app-header">
+                                      <h2>Step 1 of 4: Define Options</h2>
+                                  </section>
+                                  <section class="app-body">
+                                      <p>Describe the options you are considering.</p>
+                                      <div class="row clearfix">
+                                          <div class="col-input">
+                                              <input type="text" data-bind="value: newItem, valueUpdate: 'keyup', enterKeyPress: addItem" placeholder="Enter an option..." />
+                                          </div>
+                                          <div class="col-button">
+                                              <button class="pure-button button-secondary" data-bind="click: addItem">Add</button>
+                                          </div>
+                                      </div>
+
+                                      <div class="row">
+
+                                          <ul data-bind="foreach: items">
+                                              <li class="clearfix">
+                                                  <span data-bind="text: $data"></span>
+                                                  <button data-bind="click: $parent.removeItem"
+                                                          class="pull-right button-delete">
+                                                      X
+                                                  </button>
+                                              </li>
+                                          </ul>
+
+                                      </div>
+                                  </section>
+                                  <section class="app-footer" data-bind="css: {'can-proceed': canProceed}">
+                                      <button class="pull-left pure-button button-secondary" data-bind="click: goBack">Start Over</button>
+                                      <!-- ko if: canProceed -->
+                                      <button class="pull-right pure-button button-primary" data-bind="click: proceed">Next</button>
+                                      <!-- /ko -->
+                                      <!-- ko ifnot: canProceed -->
+                                      <span class="hint pull-right">You must enter at least two options to proceed.</span>
+                                      <!-- /ko -->
+                                  </section>
+                              </div>
+                          </script>
+
+                          <script id="define-criteria-template" type="text/html">
+                              <div class="container">
+                                  <section class="app-header">
+                                      <h2>Step 2 of 4: Define Criteria</h2>
+                                  </section>
+                                  <section class="app-body">
+                                      <p>Enter the criteria you are using for your decision.</p>
+                                      <div class="row clearfix">
+                                          <div class="col-input">
+                                              <input type="text" data-bind="value: newItem, valueUpdate: 'afterkeydown', enterKeyPress: addItem" placeholder="Enter criteria..." />
+                                          </div>
+                                          <div class="col-button">
+                                              <button class="pure-button button-secondary" data-bind="click: addItem">Add</button>
+                                          </div>
+                                      </div>
+
+                                      <div class="row">
+
+                                          <ul data-bind="foreach: items">
+                                              <li class="clearfix">
+                                                  <span data-bind="text: $data"></span>
+                                                  <button data-bind="click: $parent.removeItem"
+                                                          class="pull-right button-delete">
+                                                      X
+                                                  </button>
+                                              </li>
+                                          </ul>
+
+                                      </div>
+                                  </section>
+                                  <section class="app-footer" data-bind="css: {'can-proceed': canProceed}">
+                                      <button class="pull-left pure-button button-secondary" data-bind="click: goBack">Back</button>
+                                      <!-- ko if: canProceed -->
+                                      <button class="pull-right pure-button button-primary" data-bind="click: proceed">Next</button>
+                                      <!-- /ko -->
+                                      <!-- ko ifnot: canProceed -->
+                                      <span class="hint pull-right">You must enter at least two criteria to proceed.</span>
+                                      <!-- /ko -->
+                                  </section>
+                              </div>
+                          </script>
+
+                          <script id="compare-options-template" type="text/html">
+                              <div class="container">
+                                  <section class="app-header">
+                                      <h2>Step 3 of 4: Compare Options</h2>
+                                  </section>
+                                  <section class="app-body">
+
+                                      <p>Complete each of the <span data-bind="text: optionComparisons().length"></span> sentences below:</p>
+
+                                      <!-- ko foreach: optionComparisons -->
+                                      <div class="sentence" data-bind="css: {'completed' : rank() !== null }">
+                                          <div class="row">
+                                              <span data-bind="text: ($index() + 1)"></span>) Regarding <span class="criteria" data-bind="text: criteria"></span>, <span class="option" data-bind="text: optionA"></span> is
+                                          </div>
+
+                                          <div class="row">
+                                              <div class="sentence-option" data-bind="click: $parent.setMlt, css: {'selected': rank() === 'mlt'}">much worse than</div>
+                                              <div class="sentence-option" data-bind="click: $parent.setLt, css: {'selected': rank() === 'lt'}">worse than</div>
+                                              <div class="sentence-option" data-bind="click: $parent.setEq, css: {'selected': rank() === 'eq'}">about the same as</div>
+                                              <div class="sentence-option" data-bind="click: $parent.setGt, css: {'selected': rank() === 'gt'}">better than</div>
+                                              <div class="sentence-option" data-bind="click: $parent.setMgt, css: {'selected': rank() === 'mgt'}">much better than</div>
+                                          </div>
+
+                                          <div class="row">
+                                              <span class="option" data-bind="text: optionB"></span>.
+                                          </div>
+                                      </div>
+                                      <!-- /ko -->
+
+                                  </section>
+                                  <section class="app-footer" data-bind="css: {'can-proceed': canProceed}">
+                                      <button class="pull-left pure-button button-secondary" data-bind="click: goBack">Back</button>
+                                      <!-- ko if: canProceed -->
+                                      <button class="pull-right pure-button button-primary" data-bind="click: proceed">Next</button>
+                                      <!-- /ko -->
+                                      <!-- ko ifnot: canProceed -->
+                                      <span class="hint pull-right">You have completed all the sentences yet.</span>
+                                      <!-- /ko -->
+                                  </section>
+                              </div>
+                          </script>
+
+                          <script id="compare-criteria-template" type="text/html">
+                              <div class="container">
+                                  <section class="app-header">
+                                      <h2>Step 4 of 4: Compare Criteria</h2>
+                                  </section>
+                                  <section class="app-body">
+
+                                      <p>Complete each of the <span data-bind="text: criteriaComparisons().length"></span> sentences below:</p>
+
+                                      <!-- ko foreach: criteriaComparisons -->
+                                      <div class="sentence" data-bind="css: {'completed' : rank() !== null }">
+                                          <div class="row">
+                                              <span class="option" data-bind="text: criteriaA"></span> is
+                                          </div>
+
+                                          <div class="row">
+                                              <div class="sentence-option" data-bind="click: $parent.setMlt, css: {'selected': rank() === 'mlt'}">much less important than</div>
+                                              <div class="sentence-option" data-bind="click: $parent.setLt, css: {'selected': rank() === 'lt'}">less important than</div>
+                                              <div class="sentence-option" data-bind="click: $parent.setEq, css: {'selected': rank() === 'eq'}">equally important as</div>
+                                              <div class="sentence-option" data-bind="click: $parent.setGt, css: {'selected': rank() === 'gt'}">more important than</div>
+                                              <div class="sentence-option" data-bind="click: $parent.setMgt, css: {'selected': rank() === 'mgt'}">much more important than</div>
+                                          </div>
+
+                                          <div class="row">
+                                              <span class="option" data-bind="text: criteriaB"></span>.
+                                          </div>
+                                      </div>
+                                      <!-- /ko -->
+
+                                  </section>
+                                  <section class="app-footer" data-bind="css: {'can-proceed': canProceed}">
+                                      <button class="pull-left pure-button button-secondary" data-bind="click: goBack">Back</button>
+                                      <!-- ko if: canProceed -->
+                                      <button class="pull-right pure-button button-primary" data-bind="click: proceed">Next</button>
+                                      <!-- /ko -->
+                                      <!-- ko ifnot: canProceed -->
+                                      <span class="hint pull-right">You have completed all the sentences yet.</span>
+                                      <!-- /ko -->
+                                  </section>
+                              </div>
+                          </script>
+
+                          <script id="report-template" type="text/html">
+                              <div class="container">
+                                  <section class="app-header">
+                                      <h2>All Done!</h2>
+                                  </section>
+                                  <section class="app-body">
+                                      <p>Here's how your options are ranked based on your preferences:</p>
+
+                                      <ol class="report-options" data-bind="foreach: report">
+                                          <li>
+                                              <div class="report-bar" data-bind="scoreBar: {mine: score, best: $parent.bestScore}"></div>
+                                              <div>
+                                                  <span data-bind="text: option"></span>
+                                                  <span class="report-percentage">(<span data-bind="percentage: score"></span>)</span>
+                                              </div>
+                                          </li>
+                                      </ol>
+
+                                  </section>
+                                  <section class="app-footer">
+                                      <button class="pull-left pure-button button-secondary" data-bind="click: goBack">Back</button>
+                                      <button class="pull-right pure-button button-primary" data-bind="click: proceed">Next</button>
+                                  </section>
+                              </div>
+                          </script>
+
+                          <script id="save-to-archive-template" type="text/html">
+                              <div class="container">
+                                  <section class="app-header">
+                                      <h2>Save For Later?</h2>
+                                  </section>
+                                  <section class="app-body">
+
+                                      <p>You can save the decision to your device if you like.</p>
+
+                                      <p>
+                                          <button class="pure-button button-secondary" data-bind="click: exit">No Thanks</button>
+                                      </p>
+
+                                      <p>Name your decision:</p>
+
+                                      <p>
+                                          <input type="text" data-bind="value: name" placeholder="Name your decision..." />
+                                      </p>
+
+
+
+                                  </section>
+                                  <section class="app-footer">
+                                      <button class="pull-left pure-button button-secondary" data-bind="click: goBack">Back</button>
+                                      <button class="pull-right pure-button button-primary" data-bind="click: saveAndExit">Save &amp; Exit</button>
+                                  </section>
+                              </div>
+                          </script>
+
+                          <script id="archive-template" type="text/html">
+                              <div class="container">
+                                  <section class="app-header">
+                                      <h2>Archive</h2>
+                                  </section>
+                                  <section class="app-body">
+
+                                      <!-- ko if: isEmpty -->
+                                      <p class="archive-is-empty">Your archive is empty.</p>
+                                      <!-- /ko -->
+
+                                      <table class="archived-decisions">
+                                          <tbody data-bind="foreach: decisions">
+                                              <tr>
+                                                  <td>
+                                                      <a href="javascript:void(0);" data-bind="text: name, click: $parent.load"></a>
+                                                  </td>
+                                                  <td data-bind="prettyDateFromString: date"></td>
+                                                  <td>
+                                                      <button data-bind="click: $parent.destroy"
+                                                              class="pull-right button-delete">
+                                                          X
+                                                      </button>
+                                                  </td>
+                                              </tr>
+                                          </tbody>
+                                      </table>
+
+
+                                  </section>
+                                  <section class="app-footer">
+                                      <button class="pull-left pure-button button-secondary" data-bind="click: goHome">Back</button>
+                                      <!-- ko ifnot: isEmpty -->
+                                      <button class="pull-right pure-button button-secondary" data-bind="click: destroyAll">Delete All</button>
+                                      <!-- /ko -->
+                                  </section>
+                              </div>
+                          </script>
+
+                          <script src="lib.js"></script>
+                          <script src="app.js"></script>
+                          <script>
+                              var __vm;
+                              document.addEventListener('DOMContentLoaded', function () {
+                                  __vm = new dcidr.App();
+                                  ko.applyBindings(__vm, document.getElementById("dm"));
+                              });
+                              window.addEventListener('load', function () {
+                                  FastClick.attach(document.body);
+                              }, false);
+                          </script>
+                      </body>
+</html>

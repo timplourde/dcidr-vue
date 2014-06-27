@@ -1,0 +1,84 @@
+﻿// just for intellisense... 
+//@import 'site.less';
+
+
+header {
+    padding-top: 2rem;
+}
+footer {
+    position: relative;
+    top: auto;
+    left: auto;
+    bottom: auto;
+    width: auto;
+    height: auto;
+}
+
+.container {
+   width: 90%;
+   max-width: 650px;
+   margin: 0 auto;
+}
+
+.sentence {
+    margin: 1rem;
+    float: left;
+    width: 45%;
+}
+.sentence-option {
+    padding: .2rem 0;
+}
+.hint {
+    color: @color-gray-dark;
+    font-size: .8rem;
+    margin-top: 1rem;
+    font-weight: normal;
+    font-style: italic;
+    display: inline-block;
+}
+
+/* welcome */
+.welcome-layout {
+    h2 {
+      background-color: transparent;
+      margin-top: 1rem;
+    }
+}
+
+/* app */
+.app-layout {
+    footer {
+        display: block;
+    }
+}
+
+.app-body {
+    .clearfix;
+    padding: 0;
+    top: auto;
+    bottom: auto;
+    overflow-y: inherit;
+    .col-input {
+        width: 400px;
+    }
+    .col-button {
+        .pull-left;
+        button {
+            float: none;
+        }
+    }
+    p {
+        margin-top: 1rem;
+    }
+}
+.app-footer {
+    position: relative;
+     background-color: transparent;
+     padding: 1rem 0;
+     bottom: auto;
+     height: auto;
+     border-top: 0;
+     .pure-button {
+        box-shadow: @color-gray-shadow-alpha 3px 3px;
+     }
+}

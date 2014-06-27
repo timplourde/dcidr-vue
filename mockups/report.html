@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>DecisionMaster</title>
+    <link href="../src/css/normalize.css" rel="stylesheet" />
+    <link href="../src/css/html5bp.css" rel="stylesheet" />
+    <link href="../src/css/buttons.css" rel="stylesheet" />
+    <link href="../src/css/site.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+
+    <div id="dm" class="app-layout">
+
+        <header>
+            <div class="container">
+                <h1>DecisionMaster</h1>
+            </div>
+        </header>
+
+        <main>
+            <div class="container">
+                <section class="app-header">
+                    <h2>All Done!</h2>
+                </section>
+                <section class="app-body">
+                    <p>Here's how your options are ranked based on your preferences:</p>
+
+                    <ol class="report-options">
+                        <li>
+                            <div class="report-bar"></div>
+                            <div>
+                                NYC trip <span class="report-percentage">(33.44%)</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="report-bar"></div>
+                            <div>
+                                NYC trip <span class="report-percentage">(33.44%)</span>
+                            </div>
+                        </li><li>
+    <div class="report-bar"></div>
+    <div>
+        NYC trip <span class="report-percentage">(33.44%)</span>
+    </div>
+</li><li>
+    <div class="report-bar"></div>
+    <div>
+        NYC trip <span class="report-percentage">(33.44%)</span>
+    </div>
+</li><li>
+    <div class="report-bar"></div>
+    <div>
+        NYC trip <span class="report-percentage">(33.44%)</span>
+    </div>
+</li><li>
+    <div class="report-bar"></div>
+    <div>
+        NYC trip <span class="report-percentage">(33.44%)</span>
+    </div>
+</li>
+                    </ol>
+                    
+                </section>
+                <section class="app-footer">
+                    <button class="pull-left pure-button button-secondary">Previous</button>
+                    <button class="pull-right pure-button button-primary">Exit</button>
+                </section>
+            </div>
+        </main>
+
+        <footer>
+            <div class="container">
+                &copy; 2014 Tim Plourde
+            </div>
+        </footer>
+
+    </div>
+    <script src="../src/js/fastclick.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+        $(document).on("ready", function () {
+            new FastClick(document.body);
+            $(".sentence-option").on("click", function () {
+                var $this = $(this);
+                $this.siblings(".sentence-option").removeClass("selected");
+                $this.addClass("selected");
+            });
+        });
+    </script>
+</body>
+</html>
