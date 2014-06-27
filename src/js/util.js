@@ -44,7 +44,9 @@
     ko.bindingHandlers.percentage = {
         update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
             var pct = ko.unwrap(valueAccessor());
-            element.innerText = (pct * 100).toFixed(2) + '%';
+            return ko.bindingHandlers.text.update(element, function () {
+                return (pct * 100).toFixed(2) + '%';
+            });
         }
     };
 
