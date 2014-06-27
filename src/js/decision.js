@@ -104,7 +104,7 @@
         };
 
         self.id = model.id || ns.Util.newId();
-        self.name = ko.observable(model.name || 'Untitled');
+        self.name = ko.observable(model.name || '');
         self.date = model.date || new Date();
         self.options = ko.observableArray(model.options || []);
         self.criteria = ko.observableArray(model.criteria || []);

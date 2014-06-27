@@ -369,21 +369,22 @@
                                       <p>You can save the decision to your device if you like.</p>
 
                                       <p>
+                                          <input type="text" data-bind="value: name" placeholder="Name your decision..." />
+                                      </p>
+
+                                      <p>
                                           <button class="pure-button button-secondary" data-bind="click: exit">No Thanks</button>
                                       </p>
 
-                                      <p>Name your decision:</p>
-
-                                      <p>
-                                          <input type="text" data-bind="value: name" placeholder="Name your decision..." />
-                                      </p>
 
 
 
                                   </section>
-                                  <section class="app-footer">
+                                  <section class="app-footer" data-bind="css: {'can-proceed': okToSave}">
                                       <button class="pull-left pure-button button-secondary" data-bind="click: goBack">Back</button>
+                                      <!-- ko if: okToSave -->
                                       <button class="pull-right pure-button button-primary" data-bind="click: saveAndExit">Save &amp; Exit</button>
+                                      <!-- /ko -->
                                   </section>
                               </div>
                           </script>

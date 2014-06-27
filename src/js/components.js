@@ -142,8 +142,12 @@
 
         self.name = decision.name;
 
+        self.okToSave = ko.computed(function () {
+            return self.name().length;
+        });
+
         self.saveAndExit = function () {
-            if (self.name().length) {
+            if (self.okToSave()) {
                 ko.postbox.publish(ns.Const.EVENTS.SAVE);
                 self.exit();
             }
