@@ -90,47 +90,12 @@
                                       </p>
 
                                       <h3>Give me an example</h3>
-                                      <p>
-                                          Let's say you were choosing a family vacation.  Your options and criteria might be:
-                                      </p>
-                                      <table>
-                                          <tr>
-                                              <th>Options</th>
-                                              <th>Criteria</th>
-                                          </tr>
-                                          <tr>
-                                              <td>
-                                                  New York City
-                                              </td>
-                                              <td>
-                                                  Cost
-                                              </td>
-                                          </tr>
-                                          <tr>
-                                              <td>
-                                                  Camping
-                                              </td>
-                                              <td>
-                                                  Fun
-                                              </td>
-                                          </tr>
-                                          <tr>
-                                              <td>
-                                                  Ski Resort
-                                              </td>
-                                              <td>
-                                                  Educational Value
-                                              </td>
-                                          </tr>
-                                          <tr>
-                                              <td>
-                                                  Beach House
-                                              </td>
-                                              <td>
-                                                  Relaxation
-                                              </td>
-                                          </tr>
-                                      </table>
+
+                                      <div data-bind="template: 'options-criteria-example-template'">
+
+                                      </div>
+
+                                      
 
                                       <h3>How does it work?</h3>
                                       <p>
@@ -144,10 +109,10 @@
 
                                       <h3>Who wrote this and why?</h3>
 
-                                      <p>dcidr was written by Tim Plourde, a web developer from Pennsylvania.  </p>
+                                      <p>dcidr was written by Tim Plourde, a web developer from Pennsylvania as a side project.  </p>
 
                                       <p>
-                                          He has written several versions of this application over the years using different tools (Java, PHP, Ruby, C#, Silverlight, WPF, Flash, Windows Phone, Windows RT, and more).  This version is a mobile-first responsive modern web app.  It will probably be re-written a few times just for fun.  You can find the code on <a href="https://github.com/timplourde/dcidr">GitHub</a>.
+                                          He has written several versions of this application over the years using different tools (Java, PHP, Ruby, C#, Silverlight, WPF, Flash, Windows Phone, Windows RT, and more).  This version is a mobile-first responsive modern web app.  It will probably be re-written a few more times just for fun.  You can find the code on <a href="https://github.com/timplourde/dcidr">GitHub</a>.
                                       </p>
                                       <p>
                                           You can reach Tim via Twitter <a href="https://twitter.com/timplourde">@timplourde</a>.
@@ -171,7 +136,15 @@
                                       <h2>Step 1 of 4: Define Options</h2>
                                   </section>
                                   <section class="app-body">
-                                      <p>Describe the options you are considering.</p>
+                                      <p>Describe the options you are considering. <button title="Huh?" class="button-help" data-bind="click: showHelp.toggle">?</button></p>
+
+                                      <div class="about inline-help" data-bind="css: {'expanded': showHelp}">
+                                          <div>
+                                              <div data-bind="template: 'options-criteria-example-template'"></div>
+                                              <button class="pure-button button-secondary" data-bind="click: showHelp.toggle">Got it</button>
+                                          </div>
+                                      </div>
+
                                       <div class="row clearfix">
                                           <div class="col-input">
                                               <input type="text" data-bind="value: newItem, valueUpdate: 'keyup', enterKeyPress: addItem" placeholder="Enter an option..." />
@@ -213,7 +186,15 @@
                                       <h2>Step 2 of 4: Define Criteria</h2>
                                   </section>
                                   <section class="app-body">
-                                      <p>Enter the criteria you are using for your decision.</p>
+                                      <p>Enter the criteria you are using for your decision. <button title="Huh?" class="button-help" data-bind="click: showHelp.toggle">?</button></p>
+
+                                      <div class="about inline-help" data-bind="css: {'expanded': showHelp}">
+                                          <div>
+                                              <div data-bind="template: 'options-criteria-example-template'"></div>
+                                              <button class="pure-button button-secondary" data-bind="click: showHelp.toggle">Got it</button>
+                                          </div>
+                                      </div>
+
                                       <div class="row clearfix">
                                           <div class="col-input">
                                               <input type="text" data-bind="value: newItem, valueUpdate: 'afterkeydown', enterKeyPress: addItem" placeholder="Enter criteria..." />
@@ -369,7 +350,7 @@
                                       <p>You can save the decision to your device if you like.</p>
 
                                       <p>
-                                          <input type="text" data-bind="value: name" placeholder="Name your decision..." />
+                                          <input type="text" data-bind="value: name, valueUpdate: 'afterkeydown', enterKeyPress: saveAndExit" placeholder="Name your decision..." />
                                       </p>
 
                                       <p>
@@ -426,6 +407,50 @@
                                       <!-- /ko -->
                                   </section>
                               </div>
+                          </script>
+
+                          <script id="options-criteria-example-template" type="text/html">
+                              <p>
+                                  Let's say you were choosing a family vacation.  Your options and criteria might be:
+                              </p>
+                              <table>
+                                  <tr>
+                                      <th>Options</th>
+                                      <th>Criteria</th>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          New York City
+                                      </td>
+                                      <td>
+                                          Cost
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          Camping
+                                      </td>
+                                      <td>
+                                          Fun
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          Ski Resort
+                                      </td>
+                                      <td>
+                                          Educational Value
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          Beach House
+                                      </td>
+                                      <td>
+                                          Relaxation
+                                      </td>
+                                  </tr>
+                              </table>
                           </script>
 
                           <script src="lib.js"></script>

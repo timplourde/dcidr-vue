@@ -46,6 +46,7 @@
         this.goBack = function () {
             ko.postbox.publish(ns.Const.NAV.PREV);
         };
+        this.showHelp = ko.observable(false).extend({ toggle: true });
     };
 
     ns.Components.StringListEditor = function (stringList) {

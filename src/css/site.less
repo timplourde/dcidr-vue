@@ -17,6 +17,9 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 
+th {
+    text-align: left;
+}
 
 // mixins
 .clearfix {
@@ -58,7 +61,7 @@ body {
 .button-xlarge {
     font-size: 125%;
 }
-.button-delete {
+.button-delete, .button-help {
     border: 0;
     background-color: transparent;
     color: @color-gray-dark;
@@ -99,42 +102,7 @@ input[type="text"] {
 }
 
 // common
-.about {
-    &.expanded {
-        max-height: 100rem;
-    }
 
-    -moz-transition: max-height 1s ease-in;
-    -o-transition: max-height 1s ease-in;
-    -webkit-transition: max-height 1s ease-in;
-    transition: max-height 1s ease-in;
-    max-height: 0;
-    overflow: hidden;
-    font-size: .8rem;
-    max-width: 500px;
-    width: 90%;
-    margin: 0 auto;
-    text-align: left;
-
-    h3 {
-        color: @color-purple-dull;
-        font-weight: normal;
-        margin: 1rem 0;
-    }
-
-    table {
-        margin: 1rem 0;
-        width: 100%;
-    }
-
-    p {
-        margin: 1rem 0;
-    }
-
-    th {
-        border-bottom: 1px solid @color-gray-light;
-    }
-}
 .loading {
     text-align:center;
     padding-top: 30%;
@@ -178,7 +146,7 @@ input[type="text"] {
 }
 .sentence {
     box-shadow: rgba(0, 0, 0, 0.2) 2px 2px;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     padding: .5rem;
     border: 2px solid @color-purple;
     background-color: @color-gray-extra-light;
@@ -391,6 +359,62 @@ footer {
 	    -webkit-transform-origin: 50% 50%;
 	    -webkit-animation-iteration-count: 1;
 	    -webkit-animation-timing-function: ease-in;
+    }
+}
+
+
+.about {
+    &.expanded {
+        max-height: 100rem;
+        -moz-transition: max-height .5s ease-out;
+        -o-transition: max-height .5s ease-out;
+        -webkit-transition: max-height .5s ease-out;
+        transition: max-height .5s ease-out;
+    }
+    &.inline-help {
+
+        > div {
+            background-color: @color-gray-extra-light;
+            border: 2px dashed @color-gray-dark;    
+            padding: 0rem 1rem 1rem 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .pure-button {
+            width :100%;
+            background-color: white;
+        }
+    }
+    
+    -moz-transition: max-height .2s ease-out;
+    -o-transition: max-height .2s ease-out;
+    -webkit-transition: max-height .2s ease-out;
+    transition: max-height .2s ease-out;
+    max-height: 0;
+    overflow: hidden;
+    font-size: .8rem;
+    max-width: 500px;
+    width: 90%;
+    margin: 0 auto;
+    text-align: left;
+
+    h3 {
+        color: @color-purple-dull;
+        font-weight: normal;
+        margin: 1rem 0;
+    }
+
+    table {
+        margin: 1rem 0;
+        width: 100%;
+    }
+
+    p {
+        margin: 1rem 0;
+    }
+
+    th {
+        border-bottom: 1px solid @color-gray-light;
     }
 }
 

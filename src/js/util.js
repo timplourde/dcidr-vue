@@ -61,6 +61,13 @@
         }
     };
 
+    ko.extenders.toggle = function (target) {
+        target.toggle = function () {
+            target(!target());
+        };
+        return target;
+    };
+
     ns.Util = {
         newId: function () {
             return (new Date()).getTime().toString();
