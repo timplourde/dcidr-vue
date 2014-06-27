@@ -58,8 +58,13 @@ gulp.task('js', function () {
     return merge(libs, app);
 });
 
+gulp.task('gh-pages', function () {
+    return gulp.src('CNAME')
+        .pipe(gulp.dest(DIST));
+});
+
 gulp.task('default', ['clean'], function () {
-    gulp.start('html', 'less', 'img', 'js');
+    gulp.start('html', 'less', 'img', 'js', 'gh-pages');
 });
 
 gulp.task('watch', function () {
