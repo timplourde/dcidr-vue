@@ -71,7 +71,7 @@
         },
         history: {
             push: function (name) {
-                history.pushState(name);
+                history.pushState(name, document.title);
             },
             onPop: function (callback) {
                 window.addEventListener('popstate', function (event) {
