@@ -110,6 +110,7 @@
 
         self.criteriaComparisons = decision.criteriaComparisons; // for binding
         self.canProceed = decision.gates.criteriaComparisons;
+        self.hasMultiple = self.criteriaComparisons().length > 1;
 
         this.proceed = function () {
             ko.postbox.publish(ns.const.EVENTS.BUILD_REPORT);

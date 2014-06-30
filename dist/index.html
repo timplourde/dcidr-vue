@@ -286,7 +286,12 @@
                                   </section>
                                   <section class="app-body">
 
-                                      <p>Complete each of the <span data-bind="text: criteriaComparisons().length"></span> sentences below:</p>
+                                      <p data-bind="visible: hasMultiple">
+                                          Complete each of the <span data-bind="text: criteriaComparisons().length"></span> sentences below:
+                                      </p>
+                                      <p data-bind="visible: !hasMultiple">
+                                          Complete the following sentence:
+                                      </p>
 
                                       <!-- ko foreach: criteriaComparisons -->
                                       <div class="sentence" data-bind="css: {'completed' : rank() !== null }">
@@ -466,8 +471,8 @@
                               var __vm;
                               document.addEventListener('DOMContentLoaded', function () {
                                   __vm = new dcidr.App();
-                                  ko.applyBindings(__vm, document.getElementById("dm"));
                                   __vm.init();
+                                  ko.applyBindings(__vm, document.getElementById("dm"));
                               });
                               window.addEventListener('load', function () {
                                   FastClick.attach(document.body);

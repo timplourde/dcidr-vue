@@ -220,6 +220,9 @@ describe("decidr.components.", function () {
             expect(sut.canProceed()).toEqual(false);
         });
 
+        it('sets hasMultiple', function () {
+            expect(sut.hasMultiple).toEqual(true);
+        });
     });
 
     describe("Report", function () {
