@@ -43,6 +43,7 @@ th {
 @color-teal-light: #45BDBD;
 @color-black: #222;
 @color-orange: #f17905;
+@color-barbie: #FF00E0;
 @color-orange-light: #fce0c6;
 
 @border-radius: 4px;
@@ -52,6 +53,14 @@ th {
     text-transform: uppercase;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
     box-shadow: @color-gray-shadow-alpha 3px 3px;
+
+    &:active {
+        -moz-transform: translate(3px,3px);
+        -ms-transform: translate(3px,3px);
+        -o-transform: translate(3px,3px);
+        -webkit-transform: translate(3px,3px);
+        transform: translate(3px,3px);
+    }
 }
 .button-primary {
     color: white;
@@ -75,6 +84,10 @@ th {
         background-color: @color-gray-light;
     }
 }
+.button-help {
+    padding-left: 0.1rem;
+}
+
 
 // animations
 @-moz-keyframes wiggle {
@@ -148,7 +161,7 @@ input[type="text"] {
     box-shadow: rgba(0, 0, 0, 0.2) 2px 2px;
     margin-bottom: 1.5rem;
     padding: .5rem;
-    border: 2px solid @color-purple;
+    border: 2px solid @color-barbie;
     background-color: @color-gray-extra-light;
     .sentence-option {
     }
@@ -215,6 +228,9 @@ input[type="text"] {
         border: 0;
     }
 }
+.decision-name-field {
+    width: 100%;
+}
 
 // layout
 .pull-left {
@@ -249,7 +265,7 @@ main {
     padding-bottom: 2rem;
 }
 footer {
-    background-color: white;
+    
     height: 1.5rem;
     font-size: .7rem;
     padding-top: .3rem; 
@@ -340,7 +356,7 @@ footer {
     padding: .5rem 1rem;
     text-align: center;
     background-color: #fff;
-    border-top: 1px solid @color-gray-dark;
+    //border-top: 1px solid @color-gray-dark;
     color: white;
     font-weight: bold;
     bottom: 0;

@@ -71,22 +71,23 @@
                                   </div>
 
                                   <div class="row">
-                                      <a href="#" class="pure-button button-xlarge button-primary" data-bind="click: $root.newDecision">Get Started</a>
+                                      <a href="javascript:void(0);" class="pure-button button-xlarge button-primary" data-bind="click: getStarted">Get Started</a>
                                   </div>
 
                                   <div class="row">
-                                      <a href="#" class="pure-button button-secondary" data-bind="click: showAbout, visible: !isAboutSectionVisible()">Learn More</a>
+                                      <a href="javascript:void(0);" class="pure-button button-secondary" data-bind="click: isAboutSectionVisible.toggle, visible: !isAboutSectionVisible()">Learn More</a>
                                   </div>
 
                                   <div class="row">
-                                      <a href="#" class="pure-button button-secondary" data-bind="click: loadArchive, visible: isArchiveButtonVisible">Archive</a>
+                                      <a href="javascript:void(0);" class="pure-button button-secondary" data-bind="click: loadArchive, visible: isArchiveButtonVisible">Archive</a>
                                   </div>
 
                                   <div class="row about" data-bind="css: {'expanded': isAboutSectionVisible}">
+
                                       <h3>About this app</h3>
                                       <p>
-                                          dcidr helps you make tough decisions which involve multiple <strong>options</strong>
-                                          and <strong>criteria</strong> for free.
+                                          dcidr helps you make tough decisions involving multiple <strong>options</strong>
+                                          and <strong>criteria</strong> using a simple four-step process.
                                       </p>
 
                                       <h3>Give me an example</h3>
@@ -95,24 +96,30 @@
 
                                       </div>
 
-                                      
+                                      <p>Decisions like these are difficult to do in your head because you're pushing the limits of you <a href="http://en.wikipedia.org/wiki/Working_memory">working memory.</a>  This app breaks it down so you can focus on one thing at-a-time.</p>
+
+                                      <h3>Ok, how much?</h3>
+
+                                      <p>It's all free as in beer.</p>
 
                                       <h3>How does it work?</h3>
                                       <p>
-                                          dcidr uses a Prioritization Matrix algorithm help you make your decision.  Once you complete a series of sentences, the relative rankings among your options are calculated based on your criteria choices.
+                                          You enter your options and criteria then complete a series of sentences.  Behind the scenes, dcidr uses a Prioritization Matrix algorithm to rank your options based on your preferences.
                                       </p>
 
                                       <h3>Is any of this data being stored?</h3>
                                       <p>
-                                          All data entered only exists in your web browser.  If you clear your local storage, any decisions saved in your archive will be lost.  No decisions are ever transmitted over the Internet or stored on a server.  Google Analytics is uses to track page views.
+                                          All data entered only exists in your web browser.  No decisions are ever transmitted over the Internet or stored on a server.  When you complete a decision, you have the option to save it to your archive (your web browser's localStorage) which you can later purge.
                                       </p>
+
+                                          <p>Google Analytics is uses to track page views.</p>
 
                                       <h3>Who wrote this and why?</h3>
 
-                                      <p>dcidr was written by Tim Plourde, a web developer from Pennsylvania as a side project.  </p>
+                                      <p>dcidr was written by Tim Plourde, a software developer from Pennsylvania, as a side project.  </p>
 
                                       <p>
-                                          He has written several versions of this application over the years using different tools (Java, PHP, Ruby, C#, Silverlight, WPF, Flash, Windows Phone, Windows RT, and more).  This version is a mobile-first responsive modern web app.  It will probably be re-written a few more times just for fun.  You can find the code on <a href="https://github.com/timplourde/dcidr">GitHub</a>.
+                                          Tim has written several versions of this application over the years using different tools (Java, PHP, Ruby, C#, Silverlight, WPF, Flash, Windows Phone, Windows RT, and more).  This version is a fancy mobile-first responsive modern web app.  It will probably be re-written a few more times just for fun.  You can find the code on <a href="https://github.com/timplourde/dcidr">GitHub</a>.
                                       </p>
                                       <p>
                                           You can reach Tim via Twitter <a href="https://twitter.com/timplourde">@timplourde</a>.
@@ -136,7 +143,7 @@
                                       <h2>Step 1 of 4: Define Options</h2>
                                   </section>
                                   <section class="app-body">
-                                      <p>Describe the options you are considering. <button title="Huh?" class="button-help" data-bind="click: showHelp.toggle">?</button></p>
+                                      <p>Enter the options you are considering. <button title="Huh?" class="button-help" data-bind="click: showHelp.toggle">?</button></p>
 
                                       <div class="about inline-help" data-bind="css: {'expanded': showHelp}">
                                           <div>
@@ -147,7 +154,7 @@
 
                                       <div class="row clearfix">
                                           <div class="col-input">
-                                              <input type="text" data-bind="value: newItem, valueUpdate: 'keyup', enterKeyPress: addItem" placeholder="Enter an option..." />
+                                              <input type="text" maxlength="30" data-bind="value: newItem, valueUpdate: 'keyup', enterKeyPress: addItem" placeholder="Enter an option..." />
                                           </div>
                                           <div class="col-button">
                                               <button class="pure-button button-secondary" data-bind="click: addItem">Add</button>
@@ -186,7 +193,7 @@
                                       <h2>Step 2 of 4: Define Criteria</h2>
                                   </section>
                                   <section class="app-body">
-                                      <p>Enter the criteria you are using for your decision. <button title="Huh?" class="button-help" data-bind="click: showHelp.toggle">?</button></p>
+                                      <p>Enter your criteria. <button title="Huh?" class="button-help" data-bind="click: showHelp.toggle">?</button></p>
 
                                       <div class="about inline-help" data-bind="css: {'expanded': showHelp}">
                                           <div>
@@ -197,7 +204,7 @@
 
                                       <div class="row clearfix">
                                           <div class="col-input">
-                                              <input type="text" data-bind="value: newItem, valueUpdate: 'afterkeydown', enterKeyPress: addItem" placeholder="Enter criteria..." />
+                                              <input type="text" maxlength="30" data-bind="value: newItem, valueUpdate: 'afterkeydown', enterKeyPress: addItem" placeholder="Enter criteria..." />
                                           </div>
                                           <div class="col-button">
                                               <button class="pure-button button-secondary" data-bind="click: addItem">Add</button>
@@ -350,7 +357,7 @@
                                       <p>You can save the decision to your device if you like.</p>
 
                                       <p>
-                                          <input type="text" data-bind="value: name, valueUpdate: 'afterkeydown', enterKeyPress: saveAndExit" placeholder="Name your decision..." />
+                                          <input class="decision-name-field" maxlength="30" type="text" data-bind="value: name, valueUpdate: 'afterkeydown', enterKeyPress: saveAndExit" placeholder="Name your decision..." />
                                       </p>
 
                                       <p>
@@ -460,21 +467,23 @@
                               document.addEventListener('DOMContentLoaded', function () {
                                   __vm = new dcidr.App();
                                   ko.applyBindings(__vm, document.getElementById("dm"));
+                                  __vm.init();
                               });
                               window.addEventListener('load', function () {
                                   FastClick.attach(document.body);
                               }, false);
                           </script>
                           <script>
-                                (function (i, s, o, g, r, a, m) {
-                                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                                        (i[r].q = i[r].q || []).push(arguments)
-                                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                                    m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                                })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+                              (function (i, s, o, g, r, a, m) {
+                                  i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                                      (i[r].q = i[r].q || []).push(arguments)
+                                  }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                                  m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+                              })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-                                ga('create', 'UA-52340123-1', 'auto');
-                                ga('send', 'pageview');
+                              ga('create', 'UA-52340123-1', 'auto');
+                              ga('send', 'pageview');
                           </script>
                       </body>
+
 </html>

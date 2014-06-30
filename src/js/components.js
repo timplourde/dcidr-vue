@@ -4,23 +4,20 @@
 
     var ns = global.dcidr = global.dcidr || {};
 
-    ns.Components = ns.Components || {};
+    ns.components = ns.components || {};
 
-    ns.Components.Welcome = function (archiveIsNotEmpty) {
+    ns.components.Welcome = function (archiveIsNotEmpty) {
         this.getStarted = function () {
-            ko.postbox.publish(ns.Const.EVENTS.NEW_DECISION);
+            ko.postbox.publish(ns.const.EVENTS.NEW_DECISION);
         };
         this.loadArchive = function () {
-            ko.postbox.publish(ns.Const.NAV.ARCHIVE);
+            ko.postbox.publish(ns.const.NAV.ARCHIVE);
         };
-        this.isArchiveButtonVisible = archiveIsNotEmpty;
-        this.isAboutSectionVisible = ko.observable(false);
-        this.showAbout = function () {
-            this.isAboutSectionVisible(true);
-        }.bind(this);
+        this.isArchiveButtonVisible = archiveIsNotEmpty || false;
+        this.isAboutSectionVisible = ko.observable(false).extend({ toggle: true });
     };
 
-    ns.Components.RankSetter = function () {
+    ns.components.RankSetter = function () {
         this.setMlt = function (comparison) {
             comparison.rank('mlt');
         };
@@ -39,20 +36,20 @@
 
     };
 
-    ns.Components.BaseWizardComponent = function () {
+    ns.components.BaseWizardComponent = function () {
         this.proceed = function () {
-            ko.postbox.publish(ns.Const.NAV.NEXT);
+            ko.postbox.publish(ns.const.NAV.NEXT);
         };
         this.goBack = function () {
-            ko.postbox.publish(ns.Const.NAV.PREV);
+            ko.postbox.publish(ns.const.NAV.PREV);
         };
         this.showHelp = ko.observable(false).extend({ toggle: true });
     };
 
-    ns.Components.StringListEditor = function (stringList) {
+    ns.components.StringListEditor = function (stringList) {
         var self = this;
 
-        self = ko.utils.extend(self, new ns.Components.BaseWizardComponent());
+        self = ko.utils.extend(self, new ns.components.BaseWizardComponent());
 
         self.items = stringList;    // just for binding
 
@@ -84,61 +81,60 @@
 
     };
 
-    ns.Components.Options = function (decision) {
+    ns.components.Options = function (decision) {
         var self = this;
-        self = ko.utils.extend(self, new ns.Components.StringListEditor(decision.options));
+        self = ko.utils.extend(self, new ns.components.StringListEditor(decision.options));
         self.canProceed = decision.gates.options;
     };
 
-    ns.Components.Criteria = function (decision) {
+    ns.components.Criteria = function (decision) {
         var self = this;
-        self = ko.utils.extend(self, new ns.Components.StringListEditor(decision.criteria));
+        self = ko.utils.extend(self, new ns.components.StringListEditor(decision.criteria));
         self.canProceed = decision.gates.criteria;
     };
 
-    ns.Components.CompareOptions = function (decision) {
+    ns.components.CompareOptions = function (decision) {
         var self = this;
 
-        self = ko.utils.extend(self, new ns.Components.BaseWizardComponent());
-        self = ko.utils.extend(self, new ns.Components.RankSetter());
+        self = ko.utils.extend(self, new ns.components.BaseWizardComponent());
+        self = ko.utils.extend(self, new ns.components.RankSetter());
 
         self.optionComparisons = decision.optionComparisons; // for binding
         self.canProceed = decision.gates.optionComparisons;
     };
 
-    ns.Components.CompareCriteria = function (decision) {
+    ns.components.CompareCriteria = function (decision) {
         var self = this;
 
-        self = ko.utils.extend(self, new ns.Components.RankSetter());
+        self = ko.utils.extend(self, new ns.components.RankSetter());
 
         self.criteriaComparisons = decision.criteriaComparisons; // for binding
         self.canProceed = decision.gates.criteriaComparisons;
 
         this.proceed = function () {
-            ko.postbox.publish(ns.Const.EVENTS.BUILD_REPORT);
+            ko.postbox.publish(ns.const.EVENTS.BUILD_REPORT);
         };
         this.goBack = function () {
-            ko.postbox.publish(ns.Const.NAV.PREV);
+            ko.postbox.publish(ns.const.NAV.PREV);
         };
 
     };
 
-    ns.Components.Report = function (decision) {
+    ns.components.Report = function (decision) {
         var self = this;
 
         this.proceed = function () {
-            ko.postbox.publish(ns.Const.NAV.NEXT);
+            ko.postbox.publish(ns.const.NAV.NEXT);
         };
         this.goBack = function () {
-            ko.postbox.publish(ns.Const.NAV.PREV);
+            ko.postbox.publish(ns.const.NAV.PREV);
         };
 
-        self.bestScore = decision.report()[0].score;
-
         self.report = decision.report; // for binding
+        self.bestScore = decision.report()[0].score; // assumes it's sorted
     };
 
-    ns.Components.SaveToArchive = function (decision) {
+    ns.components.SaveToArchive = function (decision) {
         var self = this;
 
         self.name = decision.name;
@@ -149,22 +145,22 @@
 
         self.saveAndExit = function () {
             if (self.okToSave()) {
-                ko.postbox.publish(ns.Const.EVENTS.SAVE);
+                ko.postbox.publish(ns.const.EVENTS.SAVE);
                 self.exit();
             }
         };
 
         self.goBack = function () {
-            ko.postbox.publish(ns.Const.NAV.PREV);
+            ko.postbox.publish(ns.const.NAV.PREV);
         };
 
         self.exit = function () {
-            ko.postbox.publish(ns.Const.EVENTS.EXIT);
+            ko.postbox.publish(ns.const.EVENTS.EXIT);
         };
 
     };
 
-    ns.Components.Archive = function (listOfDecisions) {
+    ns.components.Archive = function (listOfDecisions) {
         var self = this;
 
         self.decisions = ko.observableArray(listOfDecisions);
@@ -174,11 +170,11 @@
         });
 
         self.load = function (decision) {
-            ko.postbox.publish(ns.Const.EVENTS.LOAD, decision.id);
+            ko.postbox.publish(ns.const.EVENTS.LOAD, decision.id);
         };
 
         self.destroy = function (decision) {
-            ko.postbox.publish(ns.Const.EVENTS.DELETE, decision.id);
+            ko.postbox.publish(ns.const.EVENTS.DELETE, decision.id);
             self.decisions.remove(decision);
             if (self.decisions().length === 0) {
                 self.goHome();
@@ -186,11 +182,11 @@
         };
 
         self.destroyAll = function () {
-            ko.postbox.publish(ns.Const.EVENTS.PURGE_ARCHIVE);
+            ko.postbox.publish(ns.const.EVENTS.PURGE_ARCHIVE);
         };
 
         self.goHome = function () {
-            ko.postbox.publish(ns.Const.EVENTS.EXIT);
+            ko.postbox.publish(ns.const.EVENTS.EXIT);
         };
 
     };

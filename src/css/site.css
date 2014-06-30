@@ -1,4 +1,4 @@
-﻿/*! normalize.css v1.1.3 | MIT License | git.io/normalize */
+/*! normalize.css v1.1.3 | MIT License | git.io/normalize */
 
 /* ==========================================================================
    HTML5 display definitions
@@ -957,6 +957,13 @@ th {
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   box-shadow: rgba(204, 204, 204, 0.5) 3px 3px;
 }
+.pure-button:active {
+  -moz-transform: translate(3px, 3px);
+  -ms-transform: translate(3px, 3px);
+  -o-transform: translate(3px, 3px);
+  -webkit-transform: translate(3px, 3px);
+  transform: translate(3px, 3px);
+}
 .button-primary {
   color: white;
   background-color: #5024d1;
@@ -980,6 +987,9 @@ th {
 .button-delete:active,
 .button-help:active {
   background-color: #dddddd;
+}
+.button-help {
+  padding-left: 0.1rem;
 }
 @-moz-keyframes wiggle {
   0% {
@@ -1063,7 +1073,7 @@ input[type="text"] {
   box-shadow: rgba(0, 0, 0, 0.2) 2px 2px;
   margin-bottom: 1.5rem;
   padding: .5rem;
-  border: 2px solid #5024d1;
+  border: 2px solid #ff00e0;
   background-color: #f1f1f1;
 }
 .sentence.completed {
@@ -1124,6 +1134,9 @@ input[type="text"] {
   padding: .5rem 0;
   border: 0;
 }
+.decision-name-field {
+  width: 100%;
+}
 .pull-left {
   float: left;
 }
@@ -1153,7 +1166,6 @@ main.transitioning {
   opacity: 0;
 }
 footer {
-  background-color: white;
   height: 1.5rem;
   font-size: .7rem;
   padding-top: .3rem;
@@ -1235,7 +1247,6 @@ footer {
   padding: .5rem 1rem;
   text-align: center;
   background-color: #fff;
-  border-top: 1px solid #808080;
   color: white;
   font-weight: bold;
   bottom: 0;
@@ -1339,6 +1350,9 @@ footer {
   .about.inline-help .pure-button {
     width: auto;
   }
+  .decision-name-field {
+    max-width: 400px;
+  }
 }
 @media screen and (min-width: 768px) {
   header {
@@ -1430,3 +1444,4 @@ footer {
 .lt-ie9 #dm {
   display: none;
 }
+/*# sourceMappingURL=site.css.map */

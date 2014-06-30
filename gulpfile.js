@@ -43,6 +43,7 @@ gulp.task('js', function () {
       .pipe(gulp.dest(DIST));
 
     var app = gulp.src([
+            'src/js/ko-custom.js',
             'src/js/util.js',
             'src/js/decision.js',
             'src/js/report.js',

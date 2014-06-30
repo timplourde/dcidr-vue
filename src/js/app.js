@@ -28,20 +28,23 @@
                 VIEWS.SAVE
             ],
             components = {},
-            archive = new ns.Archive();
+            subscriptions = [];
 
-        components[VIEWS.WELCOME] = ns.Components.Welcome;
-        components[VIEWS.OPTIONS] = ns.Components.Options;
-        components[VIEWS.CRITERIA] = ns.Components.Criteria;
-        components[VIEWS.COMPARE_OPTIONS] = ns.Components.CompareOptions;
-        components[VIEWS.COMPARE_CRITERIA] = ns.Components.CompareCriteria;
-        components[VIEWS.REPORT] = ns.Components.Report;
-        components[VIEWS.SAVE] = ns.Components.SaveToArchive;
-        components[VIEWS.ARCHIVE] = ns.Components.Archive;
+        components[VIEWS.WELCOME] = ns.components.Welcome;
+        components[VIEWS.OPTIONS] = ns.components.Options;
+        components[VIEWS.CRITERIA] = ns.components.Criteria;
+        components[VIEWS.COMPARE_OPTIONS] = ns.components.CompareOptions;
+        components[VIEWS.COMPARE_CRITERIA] = ns.components.CompareCriteria;
+        components[VIEWS.REPORT] = ns.components.Report;
+        components[VIEWS.SAVE] = ns.components.SaveToArchive;
+        components[VIEWS.ARCHIVE] = ns.components.Archive;
+
+        // props
 
         self.currentView = ko.observable({
             name: VIEWS.LOADING + TEMPLATE_POSTFIX
         });
+
         self.decision = null;
 
         self.useWelcomeLayout = ko.computed(function () {
@@ -50,6 +53,95 @@
         });
 
         self.isTransitioning = ko.observable(false);
+
+        // private
+
+        function getArchiveList() {
+            return ns.archive.getList();
+        }
+
+        function saveCurrentDecisionToArchive() {
+            ns.archive.saveDecision(self.decision);
+        }
+
+        function deleteDecision(id) {
+            ns.archive.deleteDecision(id);
+        }
+
+        function loadDecisionAndGoToFirstView(id) {
+            self.decision = ns.archive.getDecision(id);
+            self.setCurrentView(VIEWS.OPTIONS, self.decision);
+        }
+
+        function goToArchiveView() {
+            var archiveData = getArchiveList();
+            self.setCurrentView(VIEWS.ARCHIVE, archiveData);
+        }
+
+        function purgeArchiveAndGoToWelcomeView() {
+            ns.archive.empty();
+            self.goToWelcomeView();
+        }
+
+        function startNewDecisionAndLoadFirstView() {
+            disposeCurrentDecision();
+            self.decision = new ns.Decision();
+            self.setCurrentView(VIEWS.OPTIONS, self.decision);
+        }
+
+        function generateReportAndLoadReportView() {
+            if (self.decision && self.decision.generateReport()) {
+                self.setCurrentView(VIEWS.REPORT, self.decision);
+                return true;
+            }
+            return false;
+        }
+
+        function disposeCurrentDecision() {
+            if (self.decision) {
+                self.decision.dispose();
+            }
+        }
+
+        function exitCurrentDecision() {
+            disposeCurrentDecision();
+            self.decision = null;
+            self.goToWelcomeView();
+        }
+
+        /*
+         function handleBrowserBackNav(state) {
+            if (state === "welcome") {
+                self.exitCurrentDecision();
+            } else {
+                ko.postbox.publish(ns.const.NAV.PREV);
+            }
+        }*/
+
+        function handleBackNav() {
+            var current = self.currentView().nav;
+            var ix = wizardSequence.indexOf(current);
+            if (ix > 0) {
+                self.setCurrentView(wizardSequence[ix - 1], self.decision);
+            } else {
+                exitCurrentDecision();
+            }
+            ns.browser.scrollToTop();
+        }
+
+        function handleForwardNav() {
+            var current = self.currentView().nav;
+            var ix = wizardSequence.indexOf(current);
+            if (ix === wizardSequence.length - 1) {
+                // this should not happen
+                exitCurrentDecision();
+            } else {
+                self.setCurrentView(wizardSequence[ix + 1], self.decision);
+            }
+            ns.browser.scrollToTop();
+        }
+
+        // public
 
         self.setCurrentView = function (viewName, arg) {
             self.isTransitioning(true);
@@ -65,109 +157,40 @@
                     name: viewName + TEMPLATE_POSTFIX,
                     data: component
                 });
-                ns.Browser.history.push(viewName);
+                ns.browser.history.push(viewName);
                 self.isTransitioning(false);
             }, 350);
         };
 
-        ns.Browser.history.onPop(function (val) {
-            if (val === "welcome") {
-                self.exit();
-            } else {
-                ko.postbox.publish(ns.Const.NAV.PREV);
-            }
-        });
-
-        self.newDecision = function () {
-            if (self.decision) {
-                self.decision.dispose();
-            }
-            self.decision = new ns.Decision();
-            self.setCurrentView(VIEWS.OPTIONS, self.decision);
-        };
-
-        self.loadReport = function () {
-            if (self.decision && self.decision.generateReport()) {
-                self.setCurrentView(VIEWS.REPORT, self.decision);
-                return true;
-            }
-            return false;
-        };
-
-        self.saveCurrentDecisionToArchive = function () {
-            archive.saveDecision(self.decision);
-        };
-
-        self.deleteDecision = function (id) {
-            archive.deleteDecision(id);
-        };
-
-        self.purgeArchive = function () {
-            archive.empty();
-            self.goToWelcome();
-        };
-
-        self.loadArchive = function () {
-            var archiveData = archive.getList();
-            self.setCurrentView(VIEWS.ARCHIVE, archiveData);
-        };
-
-        self.loadDecision = function (id) {
-            self.decision = archive.getDecision(id);
-            //if (!self.loadReport()) {
-            self.setCurrentView(VIEWS.OPTIONS, self.decision);
-            //}
-        };
-
-        self.exitCurrentDecision = function () {
-            if (self.decision) {
-                self.decision.dispose();
-            }
-            self.decision = null;
-            self.goToWelcome();
-        };
-
-        self.goToWelcome = function () {
-            var list = archive.getList();
+        self.goToWelcomeView = function () {
+            var list = getArchiveList();
             self.setCurrentView(VIEWS.WELCOME, list.length);
         };
 
-        ko.postbox.subscribe(ns.Const.NAV.PREV, function () {
-            var current = self.currentView().nav;
-            var ix = wizardSequence.indexOf(current);
-            if (ix > 0) {
-                self.setCurrentView(wizardSequence[ix - 1], self.decision);
-            } else {
-                self.exitCurrentDecision();
-            }
-            ns.Browser.scrollToTop();
-        });
+        self.dispose = function () {
+            ko.utils.arrayForEach(subscriptions, function (s) {
+                s.dispose();
+            });
+        };
 
-        ko.postbox.subscribe(ns.Const.NAV.NEXT, function () {
-            var current = self.currentView().nav;
-            var ix = wizardSequence.indexOf(current);
-            if (ix === wizardSequence.length - 1) {
-                // this should not happen
-                self.exitCurrentDecision();
-            } else {
-                self.setCurrentView(wizardSequence[ix + 1], self.decision);
-            }
-            ns.Browser.scrollToTop();
-        });
+        self.init = self.goToWelcomeView;
 
+        ns.browser.history.onPop(handleBackNav);
 
-        ko.postbox.subscribe(ns.Const.NAV.ARCHIVE, self.loadArchive);
+        subscriptions.push(ko.postbox.subscribe(ns.const.NAV.PREV, handleBackNav));
+        subscriptions.push(ko.postbox.subscribe(ns.const.NAV.NEXT, handleForwardNav));
+        subscriptions.push(ko.postbox.subscribe(ns.const.NAV.ARCHIVE, goToArchiveView));
 
-        ko.postbox.subscribe(ns.Const.EVENTS.NEW_DECISION, self.newDecision);
-        ko.postbox.subscribe(ns.Const.EVENTS.BUILD_REPORT, self.loadReport);
-        ko.postbox.subscribe(ns.Const.EVENTS.SAVE, self.saveCurrentDecisionToArchive);
-        ko.postbox.subscribe(ns.Const.EVENTS.EXIT, self.exitCurrentDecision);
-        ko.postbox.subscribe(ns.Const.EVENTS.DELETE, self.deleteDecision);
-        ko.postbox.subscribe(ns.Const.EVENTS.PURGE_ARCHIVE, self.purgeArchive);
-        ko.postbox.subscribe(ns.Const.EVENTS.LOAD, self.loadDecision);
+        subscriptions.push(ko.postbox.subscribe(ns.const.EVENTS.NEW_DECISION, startNewDecisionAndLoadFirstView));
+        subscriptions.push(ko.postbox.subscribe(ns.const.EVENTS.BUILD_REPORT, generateReportAndLoadReportView));
+        subscriptions.push(ko.postbox.subscribe(ns.const.EVENTS.SAVE, saveCurrentDecisionToArchive));
+        subscriptions.push(ko.postbox.subscribe(ns.const.EVENTS.EXIT, exitCurrentDecision));
+        subscriptions.push(ko.postbox.subscribe(ns.const.EVENTS.DELETE, deleteDecision));
+        subscriptions.push(ko.postbox.subscribe(ns.const.EVENTS.PURGE_ARCHIVE, purgeArchiveAndGoToWelcomeView));
+        subscriptions.push(ko.postbox.subscribe(ns.const.EVENTS.LOAD, loadDecisionAndGoToFirstView));
 
-        self.goToWelcome();
-
+       
+        // fake data
         self.fake = function (page) {
             function getRandomInt(min, max) {
                 return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -177,14 +200,14 @@
                 return comparison.rank(ranks[getRandomInt(0, ranks.length - 1)]);
             }
             function fullMonty() {
-                self.newDecision();
+                startNewDecisionAndLoadFirstView();
                 self.decision.options(["NYC", "Ski Trip", "Beach", "Gettysburg"]);
                 self.decision.criteria(["Cost", "Agony", 'Educational Value', 'Fun']);
                 ko.utils.arrayForEach(self.decision.criteriaComparisons(), setRandomRank);
                 ko.utils.arrayForEach(self.decision.optionComparisons(), setRandomRank);
             }
             fullMonty();
-            self.loadReport();
+            generateReportAndLoadReportView();
         };
 
     };

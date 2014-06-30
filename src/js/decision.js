@@ -103,7 +103,7 @@
             targetArray(current.sort(hashSorter));
         };
 
-        self.id = model.id || ns.Util.newId();
+        self.id = model.id || ns.util.newId();
         self.name = ko.observable(model.name || '');
         self.date = model.date || new Date();
         self.options = ko.observableArray(model.options || []);
@@ -172,7 +172,8 @@
 
         self.generateReport = function () {
             if (self.gates.report()) {
-                self.report(ns.Report(ko.toJS(self)));
+                var data = self.export();
+                self.report(ns.report(data));
                 return true;
             } else {
                 return false;

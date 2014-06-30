@@ -4,7 +4,7 @@
 
     var ns = global.dcidr = global.dcidr || {};
 
-    ns.Report = function (decision) {
+    ns.report = function (decision) {
         // todo cleanse ranks
         // todo throw error for missing ranks
 
