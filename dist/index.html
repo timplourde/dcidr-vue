@@ -204,7 +204,7 @@
 
                                       <div class="row clearfix">
                                           <div class="col-input">
-                                              <input type="text" maxlength="30" data-bind="value: newItem, valueUpdate: 'afterkeydown', enterKeyPress: addItem" placeholder="Enter criteria..." />
+                                              <input type="text" maxlength="30" data-bind="value: newItem, valueUpdate: 'keyup', enterKeyPress: addItem" placeholder="Enter criteria..." />
                                           </div>
                                           <div class="col-button">
                                               <button class="pure-button button-secondary" data-bind="click: addItem">Add</button>
@@ -357,7 +357,7 @@
                                       <p>You can save the decision to your device if you like.</p>
 
                                       <p>
-                                          <input class="decision-name-field" maxlength="30" type="text" data-bind="value: name, valueUpdate: 'afterkeydown', enterKeyPress: saveAndExit" placeholder="Name your decision..." />
+                                          <input class="decision-name-field" maxlength="30" type="text" data-bind="value: name, valueUpdate: 'keyup', enterKeyPress: saveAndExit" placeholder="Name your decision..." />
                                       </p>
 
                                       <p>
