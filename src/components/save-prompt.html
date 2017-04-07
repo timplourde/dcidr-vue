@@ -1,0 +1,26 @@
+<app-layout>
+
+<div class="container">
+    <section class="app-header">
+        <h2>Save For Later?</h2>
+    </section>
+    <section class="app-body">
+
+        <p>You can save the decision to your device if you like.</p>
+
+        <p>
+            <input class="decision-name-field" maxlength="30" type="text" v-model="decisionName" v-on:keyup.enter="saveAndExit" placeholder="Name your decision to save it" />
+        </p>
+
+
+    </section>
+    <section class="app-footer">
+        <button class="pull-left pure-button button-secondary" v-on:click="back"> Back</button>
+        <button class="pull-right pure-button button-primary" v-on:click="saveAndExit">
+            <span v-if="decisionName">Save &amp; Exit</span>
+            <span v-if="!decisionName">Exit</span>
+        </button>
+    </section>
+</div>
+
+</app-layout>

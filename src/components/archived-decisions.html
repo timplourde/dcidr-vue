@@ -1,0 +1,41 @@
+ 
+<app-layout>
+
+
+    <div class="container">
+        <section class="app-header">
+            <h2>Archive</h2>
+        </section>
+        <section class="app-body">
+
+            <p v-if="!archivedDecisions.length" class="archive-is-empty">Your archive is empty.</p>
+
+            <table class="archived-decisions">
+                <tbody data-bind="foreach: decisions">
+                    <tr v-for="archivedDecision in archivedDecisions">
+                        <td>
+                            <a href="javascript:void(0);" v-on:click="loadDecision(archivedDecision.id)" >
+                                {{archivedDecision.name}}
+                            </a>
+                        </td>
+                        <td data-bind="prettyDateFromString: date">{{archivedDecision.date | prettyDate }}</td>
+                        <td>
+                            <button v-on:click="deleteDecision(archivedDecision.id)" 
+                                    class="pull-right button-delete">
+                                X
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+        </section>
+        <section class="app-footer">
+            <button class="pull-left pure-button button-secondary" v-on:click="back">Home</button>
+            <button class="pull-right pure-button button-secondary" v-if="archivedDecisions.length" v-on:click="deleteAll">
+                Delete All</button>
+        </section>
+    </div>
+
+ </app-layout>

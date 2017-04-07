@@ -1,0 +1,18 @@
+
+<div class="sentence" v-bind:class="{'completed' : comparison.rank !== null }">
+    <div class="row">
+        <span class="option">{{comparison.criteriaA}}</span> is
+    </div>
+
+    <div class="row">
+        <div class="sentence-option" v-bind:class="{ 'temp-selected': comparison.rank === 'mlt'}" v-on:click="setRank('mlt')">much less important than</div>
+        <div class="sentence-option" v-bind:class="{ 'temp-selected': comparison.rank === 'lt'}" v-on:click="setRank('lt')">less important than</div>
+        <div class="sentence-option" v-bind:class="{ 'temp-selected': comparison.rank === 'eq'}" v-on:click="setRank('eq')">equally important as</div>
+        <div class="sentence-option" v-bind:class="{ 'temp-selected': comparison.rank === 'gt'}" v-on:click="setRank('gt')">more important than</div>
+        <div class="sentence-option" v-bind:class="{ 'temp-selected': comparison.rank === 'mgt'}" v-on:click="setRank('mgt')">much more important than</div>
+    </div>
+
+    <div class="row">
+        <span class="option">{{comparison.criteriaB}}</span>.
+    </div>
+</div>

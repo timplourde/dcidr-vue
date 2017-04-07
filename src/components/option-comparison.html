@@ -1,0 +1,17 @@
+<div class="sentence" v-bind:class="{'completed' : comparison.rank !== null }">
+    <div class="row">
+        {{comparisonArrayIndex + 1}}) Regarding <span class="criteria">{{comparison.criteria}}</span>, <span class="option">{{comparison.optionA}}</span> is
+    </div>
+
+    <div class="row">
+        <div class="sentence-option" v-bind:class="{ 'temp-selected': comparison.rank === 'mlt'}" v-on:click="setRank('mlt')">much worse than</div>
+        <div class="sentence-option" v-bind:class="{ 'temp-selected': comparison.rank === 'lt'}" v-on:click="setRank('lt')">worse than</div>
+        <div class="sentence-option" v-bind:class="{ 'temp-selected': comparison.rank === 'eq'}" v-on:click="setRank('eq')">about the same as</div>
+        <div class="sentence-option" v-bind:class="{ 'temp-selected': comparison.rank === 'gt'}" v-on:click="setRank('gt')">better than</div>
+        <div class="sentence-option" v-bind:class="{ 'temp-selected': comparison.rank === 'mgt'}" v-on:click="setRank('mgt')">much better than</div>
+    </div>
+
+    <div class="row">
+        <span class="option">{{comparison.optionB}}</span>.
+    </div>
+</div>

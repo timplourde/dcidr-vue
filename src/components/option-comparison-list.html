@@ -1,0 +1,27 @@
+
+<app-layout>
+
+<div class="container">
+    <section class="app-header">
+        <h2>Step 3 of 4: Compare Options</h2>
+    </section>
+    <section class="app-body">
+
+        <p>Complete each of the {{optionComparisons.length}} sentences below:</p>
+
+        <option-comparison v-for="(comparison, comparisonArrayIndex) in optionComparisons" 
+            v-bind:comparison="comparison" 
+            v-bind:comparisonArrayIndex="comparisonArrayIndex" 
+            v-on:rank-changed="setRank"
+            key="comparison.hash" /> 
+
+    </section>
+    <section class="app-footer" v-bind:class="{'can-proceed': hasEnough}" >
+        <button class="pull-left pure-button button-secondary" v-on:click="back">Back</button>
+        <button v-if="hasEnough" class="pull-right pure-button button-primary" v-on:click="proceed">Next</button>
+        <span v-if="!hasEnough" class="hint pull-right">You have completed all the sentences yet.</span>
+    </section>
+</div>
+
+
+</app-layout>

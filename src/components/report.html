@@ -1,0 +1,29 @@
+
+<app-layout>
+
+
+<div class="container">
+    <section class="app-header">
+        <h2>All Done!</h2>
+    </section>
+    <section class="app-body">
+        <p>Here's how your options are ranked based on your preferences:</p>
+
+        <ol class="report-options" >
+            <li v-for="optionScore in report">
+                <div class="report-bar" v-report-bar="{mine: optionScore.score, best: bestScore}"></div>
+                <div>
+                    <span >{{optionScore.option}}</span>
+                    <span class="report-percentage">({{ optionScore.score | percentage }})</span>
+                </div>
+            </li>
+        </ol>
+    </section>
+    <section class="app-footer">
+        <button class="pull-left pure-button button-secondary" v-on:click="back">Back</button>
+        <button class="pull-right pure-button button-primary" v-on:click="proceed" title="Shortcut: Ctrl+Enter">Next</button>
+    </section>
+</div>
+
+</app-layout>
+

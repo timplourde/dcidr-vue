@@ -1,0 +1,15 @@
+<div v-bind:class="welcome ? 'welcome-layout' : 'app-layout'" >
+    <header>
+        <div class="container">
+            <img class="logo" src="dcidr.svg" alt="decidr" />
+        </div>
+    </header>
+    <main>
+        <slot></slot>
+    </main>
+    <footer>
+        <div class="container">
+            &copy; {{thisYear}} Tim Plourde | <a href="https://github.com/timplourde/dcidr">GitHub</a> | <a href="https://twitter.com/timplourde">Twitter</a>
+        </div>
+    </footer>
+</div>

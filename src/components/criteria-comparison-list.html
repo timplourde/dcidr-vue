@@ -1,0 +1,30 @@
+
+<app-layout>
+
+    <div class="container">
+        <section class="app-header">
+            <h2>Step 4 of 4: Compare Criteria</h2>
+        </section>
+        <section class="app-body">
+
+            <p v-if="criteriaComparisons.length > 1" >
+                Complete each of the {{criteriaComparisons.length}} sentences below:
+            </p>
+            <p v-if="criteriaComparisons.length === 1" >
+                Complete the following sentence:
+            </p>
+
+            <criteria-comparison v-for="comparison in criteriaComparisons" 
+                v-bind:comparison="comparison" 
+                v-on:rank-changed="setRank"
+                key="comparison.hash"/> 
+
+        </section>
+        <section class="app-footer" v-bind:class="{'can-proceed': hasEnough}">
+            <button class="pull-left pure-button button-secondary" v-on:click="back">Back</button>
+            <button v-if="hasEnough" class="pull-right pure-button button-primary" v-on:click="proceed" >Next</button>
+            <span v-if="!hasEnough" class="hint pull-right">You have completed all the sentences yet.</span>
+        </section>
+    </div>
+
+</app-layout>

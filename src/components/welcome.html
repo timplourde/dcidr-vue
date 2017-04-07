@@ -1,0 +1,71 @@
+<app-layout v-bind:welcome="true">
+    <div class="container">
+            <div class="row">
+                <h2>Quick &amp; Easy Decisions</h2>
+            </div>
+
+            <div class="row">
+                <a href="javascript:void(0);" class="pure-button button-xlarge button-primary" v-on:click="newDecision">Get Started</a>
+            </div>
+
+            <div class="row">
+                <a href="javascript:void(0);" class="pure-button button-secondary" v-if="!showLearnMore" v-on:click="showLearnMore = true">Learn More</a>
+            </div>
+
+            <div class="row">
+                <a href="javascript:void(0);" class="pure-button button-secondary" v-on:click="archive">Archive</a>
+            </div>
+
+            <div class="row about" :class="{'expanded': showLearnMore}">
+
+                <h3>About this app</h3>
+                <p>
+                    dcidr helps you make tough decisions involving multiple <strong>options</strong>
+                    and <strong>criteria</strong> using a simple four-step process.
+                </p>
+
+                <h3>Give me an example</h3>
+
+                <inline-help></inline-help>
+
+                <p>Decisions like these are difficult because you're pushing the limits of your <a href="http://en.wikipedia.org/wiki/Working_memory">working memory.</a>  This app breaks it down into bite-sized pieces.</p>
+
+                <h3>Ok, how much?</h3>
+
+                <p>It's all free as in beer.</p>
+
+                <h3>How does it work?</h3>
+                <p>
+                    You enter your options and criteria then complete a series of sentences.  Behind the scenes, dcidr uses a Prioritization Matrix algorithm to rank your options based on your preferences.
+                </p>
+
+                <h3>Is any of this data being stored?</h3>
+
+                <p>
+                    All data entered only exists in your web browser.  No decisions are ever transmitted over the Internet or stored on a server.  When you complete a decision, you have the option to save it to your archive (your web browser's localStorage) which you can later purge.
+                </p>
+
+                <p>Google Analytics is used to track page views.</p>
+
+                <h3>Who wrote this and why?</h3>
+
+                <p>dcidr is a side project written by Tim Plourde, a software developer from Philadelphia, Pennsylvania.  </p>
+
+                <p>
+                    Tim has written several versions of this application over the years using different tools (Java, Flash, Perl, PHP, Ruby, C#/XAML, Knockout.js).  The version you are using now is built with <a href="https://vuejs.org/">Vue 2</a>.  It will probably be re-written a few more times just for fun.  You can find the code on <a href="https://github.com/timplourde/dcidr">GitHub</a>.
+                </p>
+                <p>
+                    You can reach Tim via Twitter <a href="https://twitter.com/timplourde">@timplourde</a>.
+                </p>
+
+            </div>
+
+            <div class="row">
+
+                <div class="disclaimer">
+                    This app is for entertainment purposes only.
+                </div>
+
+            </div>
+        </div>
+</app-layout>

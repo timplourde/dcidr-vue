@@ -1,6 +1,7 @@
 ﻿@import (inline) "normalize.css";
 @import (inline) "html5bp.css";
 @import (inline) "buttons.css";
+@import "transitions.less";
 
 // resets
 * { 
@@ -27,6 +28,14 @@ th {
   &:before, &:after{ content:""; display:table; }
   &:after{ clear: both; }
 }
+
+
+// cloaking
+[v-cloak] { 
+    display: none 
+}
+
+
 
 // variables
 // http://colorschemedesigner.com/#3M51UhWs0g0g0
@@ -164,8 +173,6 @@ input[type="text"] {
     padding: .5rem;
     border: 2px solid @color-barbie;
     background-color: @color-gray-extra-light;
-    .sentence-option {
-    }
     &.completed {
         border-color: @color-gray-extra-light;
     }
@@ -281,9 +288,7 @@ footer {
 
 /* welcome layout */
 .welcome-layout {
-    main {
-        text-align: center;
-    }
+    text-align: center;
     h2 {
         font-size: 1.5rem;
         color: @color-purple-dull;
@@ -391,7 +396,6 @@ footer {
     &.inline-help {
 
         > div {
-            background-color: @color-gray-extra-light;
             border: 2px dashed @color-gray-dark;    
             padding: 0rem 1rem 1rem 1rem;
             margin-bottom: 2rem;
@@ -399,7 +403,6 @@ footer {
 
         .pure-button {
             width :100%;
-            background-color: white;
         }
     }
     
@@ -445,15 +448,9 @@ footer {
     @import "site-large.less";
 }
 
-// IE stuff
-#oldIe {
-    display: none;
-}
-.lt-ie9 {
-    #oldIe {
-        display: block;
-    }
-    #dm {
-        display: none;
-    }
+
+
+////// temporary
+ .temp-selected {
+    background-color: pink;
 }

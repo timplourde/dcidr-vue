@@ -1,0 +1,50 @@
+
+<app-layout >
+
+ <div class="container" v-on:keyup.ctrl.enter="proceed">
+    <section class="app-header">
+        <h2>Step 2 of 4: Define Criteria</h2>
+    </section>
+    <section class="app-body">
+        <p><span v-on:click="showHelp = true">Enter your criteria.</span> <button title="Huh?" class="button-help" v-on:click="showHelp = true">?</button></p>
+
+        <div class="about inline-help" v-bind:class="{'expanded': showHelp}">
+            <div>
+                <inline-help></inline-help>
+                <button class="pure-button button-secondary" v-on:click="showHelp = false">Got it</button>
+            </div>
+        </div>
+
+        <div class="row clearfix">
+            <div class="col-input">
+                <input type="text" maxlength="30" v-model="newCrit" v-on:keyup.enter="addCrit" placeholder="Enter criteria..." ref="newCritInput"  />
+            </div>
+            <div class="col-button">
+                <button class="pure-button button-secondary" v-on:click="addCrit">Add</button>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <ul >
+                <li v-for="crit in criteria" class="clearfix">
+                    {{crit}}
+                    <button v-on:click="removeCrit(crit)"
+                            class="pull-right button-delete">
+                        X
+                    </button>
+                </li>
+            </ul>
+
+        </div>
+    </section>
+    <section class="app-footer" v-bind:class="{'can-proceed': hasEnough}">
+        <button class="pull-left pure-button button-secondary" v-on:click="back">Back</button>
+        <button v-if="hasEnough" class="pull-right pure-button button-primary" v-on:click="proceed" title="Shortcut: Ctrl+Enter">Next</button>
+        <span v-if="!hasEnough" class="hint pull-right">You must enter at least two criteria to proceed.</span>
+
+    </section>
+    </div>
+
+
+</app-layout>

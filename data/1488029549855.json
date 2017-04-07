@@ -1,0 +1,47 @@
+{
+    "id": "1488029549855",
+    "name": "fsadf",
+    "date": "2017-02-25T13:32:29.855Z",
+    "options": [
+        "sfasd",
+        "fasdf"
+    ],
+    "criteria": [
+        "fasdfs",
+        "fasdfff"
+    ],
+    "optionComparisons": [
+        {
+            "criteria": "fasdfs",
+            "optionA": "sfasd",
+            "optionB": "fasdf",
+            "rank": "gt",
+            "hash": "fasdfs|sfasd|fasdf"
+        },
+        {
+            "criteria": "fasdfff",
+            "optionA": "sfasd",
+            "optionB": "fasdf",
+            "rank": "mgt",
+            "hash": "fasdfff|sfasd|fasdf"
+        }
+    ],
+    "criteriaComparisons": [
+        {
+            "criteriaA": "fasdfs",
+            "criteriaB": "fasdfff",
+            "rank": "eq",
+            "hash": "fasdfs|fasdfff"
+        }
+    ],
+    "report": [
+        {
+            "option": "sfasd",
+            "score": 0.9758187357197258
+        },
+        {
+            "option": "fasdf",
+            "score": 0.024181264280274183
+        }
+    ]
+}
