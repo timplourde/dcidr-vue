@@ -57,8 +57,8 @@ gulp.task('js', function (done) {
     
 });
 
-gulp.task('gh-pages', function () {
-    return gulp.src('CNAME')
+gulp.task('misc', function () {
+    return gulp.src(['CNAME', 'favicon.ico'])
         .pipe(gulp.dest(TARGET));
 });
 
@@ -71,7 +71,7 @@ gulp.task('watch', function () {
 });
 
 gulp.task('build', function () {
-    runSequence('clean', 'all', 'gh-pages');
+    runSequence('clean', 'all', 'misc');
 });
 
 gulp.task('default', function () {
