@@ -4,11 +4,12 @@ import { MUTATIONS } from '../constants';
 import { mapState } from 'vuex';
 import CriteriaComparisonComponent from './criteria-comparison';
 import decisionNavigation from '../mixins/decision-navigation';
+import scrollToTop from '../mixins/scroll-to-top';
 import {ROUTES} from '../constants';
 import LayoutComponent from './layout';
 
 const CriteriaComparisonListComponent = Vue.extend({
-  mixins: [decisionNavigation],
+  mixins: [decisionNavigation, scrollToTop],
   name: 'criteria-comparison-list-component',
   template,
   computed: mapState({
