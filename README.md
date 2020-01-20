@@ -1,5 +1,3 @@
 # decidr.org
 
-It helps you make decisions.
-
-Check it out at [dcidr.org](http://dcidr.org).
+It helps you make decisions.  Built with [Vue](https://vuejs.org/).
